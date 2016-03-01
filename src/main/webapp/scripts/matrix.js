@@ -15,14 +15,25 @@ function Matrix(rows, columns, values) {
 }
 
 /**
+ * Matrix obj constructor from int[][]
+ * @param values
+ * @constructor
+ */
+/*function Matrix(values) {
+    this.values = values;
+    this.rows = values.length;
+    this.columns = values[0].length;
+}*/
+
+/**
  * create new Matrix obj from JSON
- * @param serializedMatrixJSON
+ * @param serializedMatrixArrayJSON
  * @returns {Matrix}
  */
-var newMatrixFromJSON = function (serializedMatrixJSON) {
-    var parsedMatrix = JSON.parse(serializedMatrixJSON);
-    console.log("new Matrix created with %d rows, %d columns.",parsedMatrix.rows,parsedMatrix.columns);
-    return new Matrix(parsedMatrix.rows, parsedMatrix.columns, parsedMatrix.values)
+var newMatrixFromJSON = function (serializedMatrixArrayJSON) {
+    var parsedMatrixArray = JSON.parse(serializedMatrixArrayJSON);
+    //console.log("new Matrix created with %d rows, %d columns.",parsedMatrix.rows,parsedMatrix.columns);
+    return new Matrix(parsedMatrixArray);
 }
 
 /**
@@ -30,24 +41,24 @@ var newMatrixFromJSON = function (serializedMatrixJSON) {
  * @param tableID
  * @returns {Matrix}
  */
-var newMatrixFromTable = function(table){
+var newMatrixFromTable = function (table) {
     var rowsCount = table.rows.length;
     var columnsCount = table.rows[0].cells.length;
 
     //Create new array for table values
     var tableValuesArray = new Array();
     //iterate through rows
-    for (var i = 0; i<rowsCount; i++) {
+    for (var i = 0; i < rowsCount; i++) {
         //new array for cell values
         var newCellValuesArr = new Array();
-        for (var j = 0; j<columnsCount; j++) {
+        for (var j = 0; j < columnsCount; j++) {
             //iterate through columns
             newCellValuesArr.push(parseInt(table.rows[i].cells[j].innerHTML));
         }
         //add cell values array
         tableValuesArray.push(newCellValuesArr);
     }
-    return new Matrix(rowsCount,columnsCount,tableValuesArray);
+    return new Matrix(rowsCount, columnsCount, tableValuesArray);
 }
 
 /**
@@ -93,4 +104,26 @@ var tableBodyFromMatrix = function (objMatrix) {
     console.log("Created new tbody element");
     console.log(newBody);
     return newBody;
+}
+
+/**
+ * Generate Matrix with random value, with rowsCount and columnsCount
+ * @param rowsCount
+ * @param columnsCount
+ * @returns {Matrix}
+ */
+var generateRandomMatrix = function (rowsCount, columnsCount) {
+    const MAX = 100;
+    //Create new array for table values
+    var tableValuesArray = new Array(rowsCount);
+    //iterate through rows
+    for (var i = 0; i < rowsCount; i++) {
+        //new array for cell values
+        tableValuesArray[i]=new Array(columnsCount);
+        for (var j = 0; j < columnsCount; j++) {
+            //iterate through columns
+            tableValuesArray[i][j] = Math.floor(Math.random() * MAX);
+        }
+    }
+    return new Matrix(rowsCount, columnsCount, tableValuesArray);
 }
