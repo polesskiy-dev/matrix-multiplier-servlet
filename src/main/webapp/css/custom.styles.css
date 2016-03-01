@@ -1,0 +1,10 @@
+body {
+    background-color: #F5F7FA !important;
+}
+
+.noverticalpadding {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+}
