@@ -1,12 +1,10 @@
 package mappingtests;
 
-import junit.framework.Assert;
 import matrix.Matrix;
 import matrix.RandomMatrixGenerator;
 import org.junit.Test;
 import service.MatrixService;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +13,7 @@ import java.util.List;
 public class MatrixServiceTest {
     MatrixService matrixService = new MatrixService();
 
-    @Test
+    /*@Test
     public void testSaveRecord() throws Exception{
         //Create matrix
         Matrix testMatrix = RandomMatrixGenerator.getInstance().generateMatrix(3,3);
@@ -24,7 +22,7 @@ public class MatrixServiceTest {
         Matrix matrixFromDB = matrixService.add(testMatrix);
 
         System.out.printf("Matrix from DB: %s\r\n",matrixFromDB);
-    }
+    }*/
 
     @Test
     public void testDeleteRecord() throws Exception{
@@ -41,7 +39,7 @@ public class MatrixServiceTest {
         System.out.printf("Deleted matrix: %s\r\n",matrixFromDB);
     }
 
-    @Test
+    /*@Test
     public void testSelect() throws Exception{
         //Create matrix
         Matrix testMatrix = RandomMatrixGenerator.getInstance().generateMatrix(3,3);
@@ -56,7 +54,7 @@ public class MatrixServiceTest {
 
         //debug
         System.out.printf("Matrix ID:%d, from DB: %s\r\n",matrixFromDB.getId(),matrixFromDB);
-    }
+    }*/
 
     /*@Test
     public void voidTestUpdate() throws Exception{
@@ -80,6 +78,12 @@ public class MatrixServiceTest {
     @Test
     public void testGetAll(){
         List<Matrix> matrixList = matrixService.getAll();
+        for (Matrix matrix:matrixList) System.out.println(matrix);
+    }
+
+    @Test
+    public void testGetLast2records(){
+        List<Matrix> matrixList = matrixService.getLastRecordsAmount(2);
         for (Matrix matrix:matrixList) System.out.println(matrix);
     }
 }

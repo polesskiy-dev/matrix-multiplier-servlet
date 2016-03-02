@@ -1,5 +1,6 @@
 /**
  * Created by Artyom on 02.03.2016.
+ * Functions for working with Tables from matrix
  */
 
 var fillTableByRandomMatrix = function(tableToUpdateID, maxValue){
@@ -20,5 +21,5 @@ var fillTableByRandomMatrix = function(tableToUpdateID, maxValue){
     //clear table body
     table.removeChild(table.tBodies[0]);
     //add new tBody with editable cells
-    table.appendChild(generateTableBody(matrix, true));
+    table.appendChild(createTableBody(matrix, true));
 }

@@ -36,7 +36,14 @@ public class MatrixService {
         entityManager.getTransaction().commit();
     }*/
 
+    public List<Matrix> getLastRecordsAmount(int amount){
+        System.out.println("Last 2 records:");
+        TypedQuery<Matrix> namedQuery = entityManager.createNamedQuery("Matrix.getAll",Matrix.class).setMaxResults(amount);
+        return namedQuery.getResultList();
+    }
+
     public List<Matrix> getAll(){
+        System.out.println("All records:");
         TypedQuery<Matrix> namedQuery = entityManager.createNamedQuery("Matrix.getAll",Matrix.class);
         return namedQuery.getResultList();
     }

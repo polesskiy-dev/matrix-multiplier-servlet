@@ -1,6 +1,10 @@
 /**
  * Created by Artyom on 26.12.2015.
+ * Matrix object representation for Browser
+ * Constructors
+ * Useful objects from matrix creators
  */
+
 /**
  * Matrix obj constructor
  * @param row
@@ -20,13 +24,14 @@ function Matrix(rows, columns, values) {
  * @constructor
  */
 var newMatrixFromArr = function (values) {
-    this.rows = values.length;
-    this.columns = values[0].length;
-    this.values = values;
+    var rows = values.length;
+    var columns = values[0].length;
+    var values = values;
+    return new Matrix(rows, columns, values);
 }
 
 /**
- * create new Matrix obj from HTML table
+ * Create new Matrix obj from HTML table
  * @param tableID
  * @returns {Matrix}
  */
@@ -55,7 +60,7 @@ var newMatrixFromTable = function (table) {
  * @param objMatrix
  * @returns {Element}
  */
-var generateTableBody = function (objMatrix, isEditable) {
+var createTableBody = function (objMatrix, isEditable) {
     //create table body
     var newBody = document.createElement("tbody");
     //iterate rows
@@ -78,7 +83,7 @@ var generateTableBody = function (objMatrix, isEditable) {
 }
 
 /**
- * Generate Matrix with random values up to maxValue, with rowsCount and columnsCount
+ * Construct Matrix with random values up to maxValue, with rowsCount and columnsCount
  * @param rowsCount
  * @param columnsCount
  * @param maxValue

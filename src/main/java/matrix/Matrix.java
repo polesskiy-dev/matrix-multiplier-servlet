@@ -15,7 +15,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "MATRICES")
-@NamedQuery(name = "Matrix.getAll", query = "SELECT c from Matrix c")
+@NamedQueries({
+        @NamedQuery(name = "Matrix.getAll", query = "SELECT c from Matrix c"),
+})
 public class Matrix {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

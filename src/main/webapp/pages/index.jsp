@@ -181,8 +181,8 @@
     //fill appropriate tables
     var matrix1Table = document.getElementById("matrix1Table");
     var matrix2Table = document.getElementById("matrix2Table");
-    matrix1Table.appendChild(generateTableBody(matrix1, true));
-    matrix2Table.appendChild(generateTableBody(matrix2, true));
+    matrix1Table.appendChild(createTableBody(matrix1, true));
+    matrix2Table.appendChild(createTableBody(matrix2, true));
 
     /**
      * Send matrices arrays data to appropriate url

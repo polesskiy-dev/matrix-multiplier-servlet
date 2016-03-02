@@ -19,9 +19,10 @@
     <!--custom scripts-->
     <script src="scripts/matrix.js"></script>
     <script src="scripts/tableFunctions.js"></script>
+    <script src="scripts/logsRecordRepresentation.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container" id="logsContainer">
 
     <!--navbar-->
     <div class="row">
@@ -41,18 +42,16 @@
         </div>
     </div>
 
-    <!--matrix1-->
+    <!--jumborton-->
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <!--TODO Date-->
-                </div>
-                <div class="panel-body">
-                    <!--TODO 3 matrices data-->
-
+            <div class="jumbotron">
+                <div class="jumbotron-contents">
+                    <p>Last 10 database records,</p>
+                    <p>3 matrices with time stamp</p>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -70,12 +69,17 @@
     matricesDataArr = JSON.parse(matricesDataJSON);
     matricesCreationDateArr = JSON.parse(matricesCreationDateArrJSON);
 
-    //console.log(matricesDataArr, matricesCreationDateArr);
+    //get common container for log records
+    var container = document.getElementById('logsContainer');
 
-    for (var i = 0; i < matricesDataArr.length; i++) {
-//                    TODO generate panel with 3 matrices here
+    //fill container by rows with 3 matrices
+
+    for (var i = 0; i < matricesDataArr.length/3; i++) {
+        var matrix1 = newMatrixFromArr(matricesDataArr[i*3]);
+        var matrix2 = newMatrixFromArr(matricesDataArr[i*3+1]);
+        var matrixResult = newMatrixFromArr(matricesDataArr[i*3+2]);
+        container.appendChild(createPanelWith3Matrices(matrix1, matrix2, matrixResult, matricesCreationDateArr[i]));
     }
-
 
 </script>
 </html>
