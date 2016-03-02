@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by Artyom on 01.03.2016.
+ * Service layer for JPA
  */
 public class MatrixService {
     public EntityManager entityManager = Persistence.createEntityManagerFactory("MYMATRICES").createEntityManager();

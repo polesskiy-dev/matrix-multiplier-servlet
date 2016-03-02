@@ -5,6 +5,7 @@ import java.util.Random;
 
 /**
  * Created by Artyom on 27.11.2015.
+ * Generates matrix with random values up to MAX_VALUE
  */
 public class RandomMatrixGenerator implements iMatrixGenerator {
     private static RandomMatrixGenerator ourInstance = new RandomMatrixGenerator();

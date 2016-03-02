@@ -12,6 +12,7 @@ import java.util.Date;
 
 /**
  * Created by Artyom on 01.01.2016.
+ * Matrix POJO
  */
 @Entity
 @Table(name = "MATRICES")

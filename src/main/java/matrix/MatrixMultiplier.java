@@ -4,6 +4,8 @@ import java.util.Date;
 
 /**
  * Created by Artyom on 27.11.2015.
+ * 2 matrices multiplier
+ * returns result of matrix multiplication
  */
 public class MatrixMultiplier implements iMatrixMultiplier {
     private static MatrixMultiplier ourInstance = new MatrixMultiplier();

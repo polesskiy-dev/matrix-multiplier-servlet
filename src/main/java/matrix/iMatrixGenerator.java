@@ -5,6 +5,5 @@ package matrix;
  */
 public interface iMatrixGenerator {
     int MAX_VALUE = 10;
-
     Matrix generateMatrix(int rows, int columns);
 }
