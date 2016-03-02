@@ -1,10 +1,13 @@
 package matrix;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -81,6 +84,15 @@ public class Matrix {
     }
 
     public int[][] getValues() {
+        if (this.values == null) {
+            //update from JSON representation
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                this.values = mapper.readValue(this.valuesJSON, int[][].class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return this.values;
     }
 
@@ -105,7 +117,6 @@ public class Matrix {
     }
 
     public String getValuesJSON() {
-
         return valuesJSON;
     }
 

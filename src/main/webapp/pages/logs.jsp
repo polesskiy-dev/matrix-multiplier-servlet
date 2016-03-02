@@ -43,18 +43,39 @@
 
     <!--matrix1-->
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <!--TODO Date-->
                 </div>
                 <div class="panel-body">
                     <!--TODO 3 matrices data-->
-                    <%String matricesArr = (String) request.getAttribute("serializedMatricesArray");%>
-                    <%=matricesArr%>
+
                 </div>
             </div>
         </div>
+    </div>
 </div>
 </body>
+<script>
+    <%
+    String matricesDataArr = (String) request.getAttribute("serializedMatricesDataArray");
+    String matricesCreationDateArr = (String) request.getAttribute("serializedMatricesCreationDateArray");
+    %>
+    var matricesDataJSON = '<%=matricesDataArr%>';
+    var matricesCreationDateArrJSON = '<%=matricesCreationDateArr%>'
+    //console.log(matricesDataJSON, matricesCreationDateArrJSON);
+
+    //parse matrices
+    matricesDataArr = JSON.parse(matricesDataJSON);
+    matricesCreationDateArr = JSON.parse(matricesCreationDateArrJSON);
+
+    //console.log(matricesDataArr, matricesCreationDateArr);
+
+    for (var i = 0; i < matricesDataArr.length; i++) {
+//                    TODO generate panel with 3 matrices here
+    }
+
+
+</script>
 </html>

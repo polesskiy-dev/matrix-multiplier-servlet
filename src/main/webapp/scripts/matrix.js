@@ -15,16 +15,15 @@ function Matrix(rows, columns, values) {
 }
 
 /**
- * Matrix obj constructor from int[][]
+ * Matrix from int[][]
  * @param values
  * @constructor
  */
-//TODO fix constructor from values array
-/*function Matrix(values) {
-    this.values = values;
+var newMatrixFromArr = function (values) {
     this.rows = values.length;
     this.columns = values[0].length;
-}*/
+    this.values = values;
+}
 
 /**
  * create new Matrix obj from HTML table

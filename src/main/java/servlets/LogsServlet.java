@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +20,9 @@ public class LogsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        TODO all matrices from DB print to browser
-        String allMatrices = null;
+        int[][][] matricesDataArr = null;
+        Date[] matricesCreationDateArr = null;
+
         //service to work with DB
         MatrixService matrixService = new MatrixService();
         //JSON
@@ -27,10 +30,20 @@ public class LogsServlet extends HttpServlet {
 
         //get all matrices from DB
         List<Matrix> matrixList = matrixService.getAll();
+        if (matrixList != null) {
+            int matricesAmount = matrixList.size();
+            matricesDataArr = new int[matricesAmount][][];
+            matricesCreationDateArr = new Date[matricesAmount];
+            for (int i = 0; i < matricesAmount; i++) {
+                matricesDataArr[i] = matrixList.get(i).getValues();
+                matricesCreationDateArr[i] = matrixList.get(i).getDate();
+            }
+        }
 
         //set attribute in response jsp with matrices array in JSON string
         try {
-            req.setAttribute("serializedMatricesArray", mapper.writeValueAsString(matrixList.toArray()));
+            req.setAttribute("serializedMatricesDataArray", mapper.writeValueAsString(matricesDataArr));
+            req.setAttribute("serializedMatricesCreationDateArray", mapper.writeValueAsString(matricesCreationDateArr));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,3 +51,4 @@ public class LogsServlet extends HttpServlet {
         req.getRequestDispatcher("pages/logs.jsp").forward(req, resp);
     }
 }
+
