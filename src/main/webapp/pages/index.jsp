@@ -13,10 +13,12 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/custom.styles.css">
     <link rel="stylesheet" href="css/bootflat.css">
+    <!--common scripts-->
     <script src="scripts/jquery-2.1.4.js"></script>
     <script src="scripts/bootstrap.js"></script>
+    <!--custom scripts-->
     <script src="scripts/matrix.js"></script>
-    <script src="scripts/matrixFiller.js"></script>
+    <script src="scripts/tableFunctions.js"></script>
     <script src="scripts/AJAX.js"></script>
 </head>
 <body>
@@ -34,7 +36,7 @@
                     <div>
                         <ul class="nav navbar-nav">
                             <li><a href="/logs.html">Requests log</a></li>
-                            <li><a href="/about.html">About</a></li>
+                            <!--li><a href="/about.html">About</a></li-->
                         </ul>
                     </div>
                 </div>
@@ -55,7 +57,7 @@
                     <p>Press "Calculate" button to fill "Result matrix" table and create new record in database. To see
                         log - click "Requests log" in navigation bar.</p>
                     <!--div class="text-center"-->
-                    <button onclick="newAJAXrequestSendTablesDataJSON('matrix1Table','matrix2Table')" type="button"
+                    <button onclick="calculateResult()" type="button"
                             class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ok"></span> Calculate
                         result!
                     </button>
@@ -97,7 +99,7 @@
                             </ul>
                         </div>
                         <div class="btn-group" role="group">
-                            <button onclick="updateMatrixTableByRandom('matrix1Table')" type="button"
+                            <button onclick="fillTableByRandomMatrix('matrix1Table')" type="button"
                                     class="btn btn-default">fill random <span class="glyphicon glyphicon-random"></span>
                             </button>
                         </div>
@@ -135,7 +137,7 @@
                             </ul>
                         </div>
                         <div class="btn-group" role="group">
-                            <button onclick="updateMatrixTableByRandom('matrix2Table')" type="button"
+                            <button onclick="fillTableByRandomMatrix('matrix2Table')" type="button"
                                     class="btn btn-default">fill random <span class="glyphicon glyphicon-random"></span>
                             </button>
                         </div>
@@ -165,42 +167,33 @@
 </div>
 </body>
 <script>
-    /*var xmlhttp = new XMLHttpRequest();
-    var url = "testmatrix.json";
 
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            //get Table by id
-            var resultTable = document.getElementById("resultMatrixTable");
-            var matrix1Table = document.getElementById("matrix1Table");
-            var matrix2Table = document.getElementById("matrix2Table");
-            //clear
-            //resultTable.removeChild(resultTable.firstChild);
-            resultTable.appendChild(tableBodyFromMatrix(newMatrixFromJSON(xmlhttp.responseText)));
-            matrix1Table.appendChild(tableBodyFromMatrix(newMatrixFromJSON(xmlhttp.responseText)));
-            matrix2Table.appendChild(tableBodyFromMatrix(newMatrixFromJSON(xmlhttp.responseText)));
-
-            console.log(xmlhttp.responseText);
-            console.log("xmlhttp Request Accepted");
-        }
-    }
-
-    xmlhttp.open('GET', url, true);
-    xmlhttp.send();*/
-
-    const ROWS_MAX=10;
-    const COLUMNS_MAX=10;
+    const RESULT_MATRIX_URL = "result-matrix.json";
+    const MAX_VALUE = 10;
+    const ROWS_MAX = 10;
+    const COLUMNS_MAX = 10;
     /**
      * Generate 2 matrices with random values
      */
-    var matrix1 = generateRandomMatrix(ROWS_MAX,COLUMNS_MAX);
-    var matrix2 = generateRandomMatrix(ROWS_MAX,COLUMNS_MAX);
+    var matrix1 = generateRandomMatrix(ROWS_MAX, COLUMNS_MAX, MAX_VALUE);
+    var matrix2 = generateRandomMatrix(ROWS_MAX, COLUMNS_MAX, MAX_VALUE);
 
-    //fill apropriate tables
+    //fill appropriate tables
     var matrix1Table = document.getElementById("matrix1Table");
     var matrix2Table = document.getElementById("matrix2Table");
-    matrix1Table.appendChild(tableBodyFromMatrix(matrix1));
-    matrix2Table.appendChild(tableBodyFromMatrix(matrix2));
+    matrix1Table.appendChild(generateTableBody(matrix1, true));
+    matrix2Table.appendChild(generateTableBody(matrix2, true));
 
+    /**
+     * Send matrices arrays data to appropriate url
+     * and get (by post) result of multiplication in JSON
+     */
+    var calculateResult = function () {
+        var matrix1json = JSON.stringify(newMatrixFromTable(matrix1Table).values);
+        var matrix2json = JSON.stringify(newMatrixFromTable(matrix2Table).values);
+        var matrixResultTable = document.getElementById("resultMatrixTable");
+
+        postServerResult(matrix1json, matrix2json, RESULT_MATRIX_URL, matrixResultTable);
+    }
 </script>
 </html>

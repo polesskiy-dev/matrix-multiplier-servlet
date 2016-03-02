@@ -19,22 +19,12 @@ function Matrix(rows, columns, values) {
  * @param values
  * @constructor
  */
+//TODO fix constructor from values array
 /*function Matrix(values) {
     this.values = values;
     this.rows = values.length;
     this.columns = values[0].length;
 }*/
-
-/**
- * create new Matrix obj from JSON
- * @param serializedMatrixArrayJSON
- * @returns {Matrix}
- */
-var newMatrixFromJSON = function (serializedMatrixArrayJSON) {
-    var parsedMatrixArray = JSON.parse(serializedMatrixArrayJSON);
-    //console.log("new Matrix created with %d rows, %d columns.",parsedMatrix.rows,parsedMatrix.columns);
-    return new Matrix(parsedMatrixArray);
-}
 
 /**
  * create new Matrix obj from HTML table
@@ -62,38 +52,22 @@ var newMatrixFromTable = function (table) {
 }
 
 /**
- * create Table body from Matrix object
+ * create editable Table body from Matrix object
  * @param objMatrix
  * @returns {Element}
  */
-var tableBodyFromMatrix = function (objMatrix) {
+var generateTableBody = function (objMatrix, isEditable) {
     //create table body
     var newBody = document.createElement("tbody");
     //iterate rows
-    for (i = 0; i < objMatrix.rows; i++) {
+    for (var i = 0; i < objMatrix.rows; i++) {
         //create new row
-        row = document.createElement('tr');
+        var row = document.createElement('tr');
         //iterate columns
-        for (j = 0; j < objMatrix.columns; j++) {
+        for (var j = 0; j < objMatrix.columns; j++) {
             //new cell
-            cell = document.createElement('td');
-            cell.contentEditable = true;
-            /*
-             //create input field
-             inputField = document.createElement("input");
-             //set input field attributes
-             //id
-             inputField.id = tableName + "Row" + i.toString() + "Column" + j.toString() + "Input";
-             //input type
-             inputField.type = "text";
-             //data required
-             inputField.required = true;
-             //size
-             inputField.size = 1;
-             //set value
-             inputField.setAttribute("value", iMatrix.values[i][j]);
-             cell.appendChild(inputField);
-             */
+            var cell = document.createElement('td');
+            cell.contentEditable = isEditable;
             //new value in cell
             cell.innerHTML = objMatrix.values[i][j];
             row.appendChild(cell);
@@ -101,19 +75,17 @@ var tableBodyFromMatrix = function (objMatrix) {
         //add row to tablebody
         newBody.appendChild(row);
     }
-    console.log("Created new tbody element");
-    console.log(newBody);
     return newBody;
 }
 
 /**
- * Generate Matrix with random value, with rowsCount and columnsCount
+ * Generate Matrix with random values up to maxValue, with rowsCount and columnsCount
  * @param rowsCount
  * @param columnsCount
+ * @param maxValue
  * @returns {Matrix}
  */
-var generateRandomMatrix = function (rowsCount, columnsCount) {
-    const MAX = 100;
+var generateRandomMatrix = function (rowsCount, columnsCount, maxValue) {
     //Create new array for table values
     var tableValuesArray = new Array(rowsCount);
     //iterate through rows
@@ -122,7 +94,7 @@ var generateRandomMatrix = function (rowsCount, columnsCount) {
         tableValuesArray[i]=new Array(columnsCount);
         for (var j = 0; j < columnsCount; j++) {
             //iterate through columns
-            tableValuesArray[i][j] = Math.floor(Math.random() * MAX);
+            tableValuesArray[i][j] = Math.floor(Math.random() * maxValue);
         }
     }
     return new Matrix(rowsCount, columnsCount, tableValuesArray);
