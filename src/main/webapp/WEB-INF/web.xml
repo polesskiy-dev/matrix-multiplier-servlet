@@ -4,36 +4,36 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-
+    <!--servlet names-->
     <servlet>
         <servlet-name>mainServlet</servlet-name>
         <servlet-class>servlets.MainServlet</servlet-class>
     </servlet>
-
-    <!--servlet>
-        <servlet-name>matrixServlet</servlet-name>
-        <servlet-class>servlets.MatrixServlet</servlet-class>
-    </servlet-->
 
     <servlet>
         <servlet-name>resultMatrixServlet</servlet-name>
         <servlet-class>servlets.ResultMatrixServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>logsServlet</servlet-name>
+        <servlet-class>servlets.LogsServlet</servlet-class>
+    </servlet>
 
+    <!--servlet mapping-->
     <servlet-mapping>
         <servlet-name>mainServlet</servlet-name>
         <url-pattern>/index.html</url-pattern>
     </servlet-mapping>
 
-    <!--servlet-mapping>
-        <servlet-name>matrixServlet</servlet-name>
-        <url-pattern>/matrix.json</url-pattern>
-    </servlet-mapping-->
-
     <servlet-mapping>
         <servlet-name>resultMatrixServlet</servlet-name>
         <url-pattern>/result-matrix.json</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>logsServlet</servlet-name>
+        <url-pattern>/logs.html</url-pattern>
     </servlet-mapping>
 
 </web-app>
