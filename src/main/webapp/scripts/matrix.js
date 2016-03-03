@@ -32,10 +32,11 @@ var newMatrixFromArr = function (values) {
 
 /**
  * Create new Matrix obj from HTML table
- * @param tableID
+ * @param table
  * @returns {Matrix}
  */
 var newMatrixFromTable = function (table) {
+    const STUB_FOR_INVALID_DATA = 0;
     var rowsCount = table.rows.length;
     var columnsCount = table.rows[0].cells.length;
 
@@ -47,7 +48,19 @@ var newMatrixFromTable = function (table) {
         var newCellValuesArr = new Array();
         for (var j = 0; j < columnsCount; j++) {
             //iterate through columns
-            newCellValuesArr.push(parseInt(table.rows[i].cells[j].innerHTML));
+            var parsedValue = parseInt(table.rows[i].cells[j].innerHTML);
+            //add cell integer data, other converts to 0
+            if (isNaN(parsedValue) == false && Math.abs(parsedValue)<0xFFFF){// && newValue<Number.MAX_VALUE && newValue>Number.MIN_VALUE){
+                newCellValuesArr.push(parsedValue);
+                table.rows[i].cells[j].innerHTML = parsedValue;
+                table.rows[i].cells[j].removeAttribute('style');
+            } else {
+                //replace invalid data by STUB_FOR_INVALID_DATA
+                newCellValuesArr.push(STUB_FOR_INVALID_DATA);
+                table.rows[i].cells[j].innerHTML = STUB_FOR_INVALID_DATA;
+                //mark cell with invalid data
+                table.rows[i].cells[j].style.color = 'red';
+            }
         }
         //add cell values array
         tableValuesArray.push(newCellValuesArr);
@@ -95,7 +108,7 @@ var generateRandomMatrix = function (rowsCount, columnsCount, maxValue) {
     //iterate through rows
     for (var i = 0; i < rowsCount; i++) {
         //new array for cell values
-        tableValuesArray[i]=new Array(columnsCount);
+        tableValuesArray[i] = new Array(columnsCount);
         for (var j = 0; j < columnsCount; j++) {
             //iterate through columns
             tableValuesArray[i][j] = Math.floor(Math.random() * maxValue);

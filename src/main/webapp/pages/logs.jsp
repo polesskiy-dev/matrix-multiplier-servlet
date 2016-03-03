@@ -47,8 +47,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="jumbotron">
                 <div class="jumbotron-contents">
-                    <p>Last 10 database records,</p>
-                    <p>3 matrices with time stamp</p>
+                    <h4>Last 10 calculations from database, with time stamps.</h4>
                 </div>
             </div>
 
@@ -74,10 +73,10 @@
 
     //fill container by rows with 3 matrices
 
-    for (var i = 0; i < matricesDataArr.length/3; i++) {
-        var matrix1 = newMatrixFromArr(matricesDataArr[i*3]);
-        var matrix2 = newMatrixFromArr(matricesDataArr[i*3+1]);
-        var matrixResult = newMatrixFromArr(matricesDataArr[i*3+2]);
+    for (var i = 0; i < matricesDataArr.length / 3; i++) {
+        var matrixResult = newMatrixFromArr(matricesDataArr[i * 3]);
+        var matrix2 = newMatrixFromArr(matricesDataArr[i * 3 + 1]);
+        var matrix1 = newMatrixFromArr(matricesDataArr[i * 3 + 2]);
         container.appendChild(createPanelWith3Matrices(matrix1, matrix2, matrixResult, matricesCreationDateArr[i]));
     }
 

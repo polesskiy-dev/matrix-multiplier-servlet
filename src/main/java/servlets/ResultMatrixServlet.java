@@ -1,5 +1,6 @@
 package servlets;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import matrix.Matrix;
 import matrix.MatrixMultiplier;
@@ -22,29 +23,36 @@ import java.util.Date;
 public class ResultMatrixServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //parse request body JSON to [int[][][]
         ObjectMapper mapper = new ObjectMapper();
-        int[][][] matrixArrays = mapper.readValue(req.getReader(), int[][][].class);
 
-        //build matrices from 2 arrays[][]
-        Matrix matrix1 = new Matrix(matrixArrays[0].length, matrixArrays[0][0].length, new Date(), matrixArrays[0]);
-        Matrix matrix2 = new Matrix(matrixArrays[1].length, matrixArrays[1][0].length, new Date(), matrixArrays[1]);
-        //calculate matrix1*matrix2
-        Matrix matrixResult = MatrixMultiplier.getInstance().multiply(matrix1, matrix2);
+        try {
+            //parse request body JSON to int[][][]
+            int[][][] matrixArrays = mapper.readValue(req.getReader(), int[][][].class);
 
-        //response resultMatrix internal array in JSON to browser
-        PrintWriter outToBrowser = resp.getWriter();
-        mapper.writeValue(outToBrowser, matrixResult.getValues());
+            //build matrices from 2 arrays[][]
+            Matrix matrix1 = new Matrix(matrixArrays[0].length, matrixArrays[0][0].length, new Date(), matrixArrays[0]);
+            Matrix matrix2 = new Matrix(matrixArrays[1].length, matrixArrays[1][0].length, new Date(), matrixArrays[1]);
 
-        //debug
-        System.out.printf("matrix1: %s\r\nmatrix2: %s\r\n,result: %s\r\n", matrix1, matrix2, matrixResult);
+            //calculate matrix1*matrix2
+            Matrix matrixResult = MatrixMultiplier.getInstance().multiply(matrix1, matrix2);
 
-        //store to database
-        if (matrix1 != null && matrix2 != null && matrixResult != null) {
-            MatrixService matrixService = new MatrixService();
-            matrixService.add(matrix1);
-            matrixService.add(matrix2);
-            matrixService.add(matrixResult);
+            //response resultMatrix internal array in JSON to browser
+            PrintWriter outToBrowser = resp.getWriter();
+            mapper.writeValue(outToBrowser, matrixResult.getValues());
+
+            //debug
+            System.out.printf("matrix1: %s\r\nmatrix2: %s\r\n,result: %s\r\n", matrix1, matrix2, matrixResult);
+
+            //store to database
+            if (matrix1 != null && matrix2 != null && matrixResult != null) {
+                MatrixService matrixService = new MatrixService();
+                matrixService.add(matrix1);
+                matrixService.add(matrix2);
+                matrixService.add(matrixResult);
+            }
+        } catch (Exception e) {
+            //if some problems with incoming data - response with HTTP 400 code (bad request)
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 }

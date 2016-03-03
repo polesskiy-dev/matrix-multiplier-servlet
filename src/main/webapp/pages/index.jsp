@@ -18,6 +18,7 @@
     <script src="scripts/bootstrap.js"></script>
     <!--custom scripts-->
     <script src="scripts/matrix.js"></script>
+    <script src="scripts/matrixTable.js"></script>
     <script src="scripts/tableFunctions.js"></script>
     <script src="scripts/AJAX.js"></script>
 </head>
@@ -79,24 +80,24 @@
                     </table>
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                rows
-                                <span class="caret"></span>
+                            <button onclick="addRowAndColumn('matrix1Table','matrix2Table')" type="button"
+                                    class="btn btn-default">Row <span class="glyphicon glyphicon-plus"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <!--li><a href="#">Dropdown link</a></li-->
-                            </ul>
                         </div>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                columns
-                                <span class="caret"></span>
+                            <button onclick="deleteRowAndColumn('matrix1Table','matrix2Table')" type="button"
+                                    class="btn btn-default">Row <span class="glyphicon glyphicon-minus"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <!--li><a href="#">Dropdown link</a></li-->
-                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button onclick="addRowAndColumn('matrix2Table','matrix1Table')" type="button"
+                                    class="btn btn-default">Column <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button onclick="deleteRowAndColumn('matrix2Table','matrix1Table')" type="button"
+                                    class="btn btn-default">Column <span class="glyphicon glyphicon-minus"></span>
+                            </button>
                         </div>
                         <div class="btn-group" role="group">
                             <button onclick="fillTableByRandomMatrix('matrix1Table')" type="button"
@@ -117,24 +118,24 @@
                     </table>
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                rows
-                                <span class="caret"></span>
+                            <button onclick="addRowAndColumn('matrix2Table','matrix1Table')" type="button"
+                                    class="btn btn-default">Row <span class="glyphicon glyphicon-plus"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <!--li><a href="#">Dropdown link</a></li-->
-                            </ul>
                         </div>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                columns
-                                <span class="caret"></span>
+                            <button onclick="deleteRowAndColumn('matrix2Table','matrix1Table')" type="button"
+                                    class="btn btn-default">Row <span class="glyphicon glyphicon-minus"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <!--li><a href="#">Dropdown link</a></li-->
-                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button onclick="addRowAndColumn('matrix1Table','matrix2Table')" type="button"
+                                    class="btn btn-default">Column <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button onclick="deleteRowAndColumn('matrix1Table','matrix2Table')" type="button"
+                                    class="btn btn-default">Column <span class="glyphicon glyphicon-minus"></span>
+                            </button>
                         </div>
                         <div class="btn-group" role="group">
                             <button onclick="fillTableByRandomMatrix('matrix2Table')" type="button"
@@ -155,11 +156,6 @@
                 <div class="panel-body">
                     <table id="resultMatrixTable" class="table table-bordered table-condensed noverticalpadding">
                     </table>
-                    <!--div class="btn-group btn-group-justified" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default">perform multiplication</button>
-                        </div>
-                    </div-->
                 </div>
             </div>
         </div>
@@ -183,6 +179,11 @@
     var matrix2Table = document.getElementById("matrix2Table");
     matrix1Table.appendChild(createTableBody(matrix1, true));
     matrix2Table.appendChild(createTableBody(matrix2, true));
+
+    //fil drop-down menus
+    var dropDownClickAction = function () {
+        console.log("clicked");
+    }
 
     /**
      * Send matrices arrays data to appropriate url

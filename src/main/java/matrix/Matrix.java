@@ -17,7 +17,7 @@ import java.util.Date;
 @Entity
 @Table(name = "MATRICES")
 @NamedQueries({
-        @NamedQuery(name = "Matrix.getAll", query = "SELECT c from Matrix c"),
+        @NamedQuery(name = "Matrix.getAll", query = "SELECT c from Matrix c ORDER BY c.id DESC"),
 })
 public class Matrix {
     @Id

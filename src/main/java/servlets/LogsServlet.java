@@ -17,9 +17,9 @@ import java.util.List;
  * Created by Artyom on 02.03.2016.
  */
 public class LogsServlet extends HttpServlet {
+    static final int MAX_RECORDS = 30;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        TODO all matrices from DB print to browser
         int[][][] matricesDataArr = null;
         Date[] matricesCreationDateArr = null;
 
@@ -28,8 +28,8 @@ public class LogsServlet extends HttpServlet {
         //JSON
         ObjectMapper mapper = new ObjectMapper();
 
-        //get all matrices from DB
-        List<Matrix> matrixList = matrixService.getAll();
+        //get last 10 matrices from DB
+        List<Matrix> matrixList = matrixService.getLastRecordsAmount(MAX_RECORDS);
         if (matrixList != null) {
             int matricesAmount = matrixList.size();
             matricesDataArr = new int[matricesAmount][][];
