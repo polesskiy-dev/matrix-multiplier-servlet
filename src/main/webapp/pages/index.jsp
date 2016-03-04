@@ -51,12 +51,12 @@
             <div class="jumbotron">
                 <div class="jumbotron-contents">
                     <h2>Hello username!</h2>
-                    <p>It's a simple matrix multiplication project powered by Java Servlet, Hibernate,
-                        Bootstrap+Bootflat.</p>
-                    <p>Please, choose number of rows and columns by selecting from drop-down list. You can press "fill
-                        random" button to add to matrix random integer values.</p>
-                    <p>Press "Calculate" button to fill "Result matrix" table and create new record in database. To see
-                        log - click "Requests log" in navigation bar.</p>
+                    <p>It's a simple matrix multiplication project powered by Java Servlets, JPA,
+                        Bootstrap. Hosted on GAE.</p>
+                    <p>You can change number of rows/columns by clicking on + or - buttons under the matrices. You can click "fill
+                        random" button to fill the matrix by random integer values.</p>
+                    <p>Press "Calculate" button to get "Result matrix" table and create new record in database. To see
+                        last 10 records - click "Requests log" in the navigation bar.</p>
                     <!--div class="text-center"-->
                     <button onclick="calculateResult()" type="button"
                             class="btn btn-default btn-lg"><span class="glyphicon glyphicon-ok"></span> Calculate
