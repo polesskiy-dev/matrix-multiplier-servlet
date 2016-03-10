@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.google.appengine:gcloud-maven-plugin:2.0.9.95.v20160203">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/appengine/gcloud-maven-plugin/2.0.9.95.v20160203/gcloud-maven-plugin-2.0.9.95.v20160203.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/appengine/gcloud-maven-plugin/2.0.9.95.v20160203/gcloud-maven-plugin-2.0.9.95.v20160203-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/appengine/gcloud-maven-plugin/2.0.9.95.v20160203/gcloud-maven-plugin-2.0.9.95.v20160203-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

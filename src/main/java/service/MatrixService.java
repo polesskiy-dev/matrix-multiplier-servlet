@@ -12,13 +12,17 @@ import java.util.List;
  * Service layer for JPA
  */
 public class MatrixService {
-    public EntityManager entityManager = Persistence.createEntityManagerFactory("MYMATRICES").createEntityManager();
+    public EntityManager entityManager = EMF.get().createEntityManager();
 
     public Matrix add(Matrix matrix){
-        entityManager.getTransaction().begin();
-        Matrix matrixFromDB = entityManager.merge(matrix);//generates INSERT or UPDATE in case of obj state
-        entityManager.getTransaction().commit();
-        return matrixFromDB;
+//        try {
+            entityManager.getTransaction().begin();
+            Matrix matrixFromDB = entityManager.merge(matrix);//generates INSERT or UPDATE in case of obj state
+            entityManager.getTransaction().commit();
+            return matrixFromDB;
+//        } finally {
+//            entityManager.close();
+//        }
     }
 
     public void deleteById (int id){

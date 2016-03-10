@@ -13,7 +13,7 @@ import java.util.List;
 public class MatrixServiceTest {
     MatrixService matrixService = new MatrixService();
 
-    /*@Test
+    @Test
     public void testSaveRecord() throws Exception{
         //Create matrix
         Matrix testMatrix = RandomMatrixGenerator.getInstance().generateMatrix(3,3);
@@ -22,9 +22,9 @@ public class MatrixServiceTest {
         Matrix matrixFromDB = matrixService.add(testMatrix);
 
         System.out.printf("Matrix from DB: %s\r\n",matrixFromDB);
-    }*/
+    }
 
-    @Test
+//    @Test
     public void testDeleteRecord() throws Exception{
         //Create matrix
         Matrix testMatrix = RandomMatrixGenerator.getInstance().generateMatrix(3,3);
@@ -75,13 +75,13 @@ public class MatrixServiceTest {
         System.out.printf("Updated Car ID:%d, from DB: %s\r\n",car2.getId(),car2);
     }*/
 
-    @Test
+//    @Test
     public void testGetAll(){
         List<Matrix> matrixList = matrixService.getAll();
         for (Matrix matrix:matrixList) System.out.println(matrix);
     }
 
-    @Test
+//    @Test
     public void testGetLast2records(){
         List<Matrix> matrixList = matrixService.getLastRecordsAmount(2);
         for (Matrix matrix:matrixList) System.out.println(matrix);
